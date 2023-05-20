@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <HeaderComponent class="header" @click=""></HeaderComponent>
-    <SideNavComponent class="sidenav"></SideNavComponent>
+    <HeaderComponent class="header"></HeaderComponent>
+    <SideNavComponent :class="[(sideNavShown && `active`),'sidenav']"></SideNavComponent>
+    <div class="burger-icon" @click="showSideNav">
+      <img src="../assets/white-hamburger.png" alt="">
+    </div>
     <IntroComponent></IntroComponent>
     <FeaturesComponent></FeaturesComponent>
     <ReasonsComponent></ReasonsComponent>
@@ -42,15 +45,9 @@ export default {
     methods:{
       showSideNav(){
         if(!this.sideNavShown){
-          document.querySelector(".sidenav").style.cssText = `
-            transform:translateX(0);
-          `
           this.sideNavShown = true
           
         }else if(this.sideNavShown){
-          document.querySelector(".sidenav").style.cssText = `
-            transform:translateX(100%);
-          `
           this.sideNavShown = false
         }
       }
@@ -61,6 +58,22 @@ export default {
 <style>
 body{
   position: relative;
+}
+.burger-icon{
+    position: absolute;
+    top:20px;
+    right:20px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 11;
+}
+@media (min-width:776px) {
+  .burger-icon{
+    display: none;
+  }
+}
+.sidenav .burger-icon img{
+  width: 30px;
 }
 .home{
   position: relative;
@@ -83,5 +96,8 @@ body{
   border-radius: 10px 0px 0px 10px;
   transition: all 0.4s 0s ease-out;
   transform: translateX(100%);
+}
+.sidenav.active{
+  transform: translateX(0%);
 }
 </style>

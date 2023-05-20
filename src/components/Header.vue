@@ -19,9 +19,9 @@
                 <router-link to="/sign-up" class="sign-up link">Sign Up</router-link>
                 <router-link to="/login" class="login link">Login</router-link>
             </div>
-            <div class="burger-icon">
+            <!-- <div class="burger-icon" @click="$emit('close',name)">
                 <img src="../assets/white-hamburger.png" alt="">
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -30,6 +30,18 @@
 
 export default {
         name:"HeaderComp",
+        emits:{
+            // (name): rafers to the sent data
+            close:(name) => {
+                if(!name){
+                    return false;
+                }else{
+                    return true;
+                    console.log(name)
+                }
+            },
+            // now if name (sent data) does NOT exist, a warning will appear in the console
+        },
     }
 </script>
 
